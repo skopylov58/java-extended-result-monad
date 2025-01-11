@@ -21,10 +21,11 @@ classDiagram
         map()
         flatMap()
         filter()
+        ...()
 
     }
     
-    class Ok~T~{
+    class Ok ~T~ {
       T value
       fold()
       consume()

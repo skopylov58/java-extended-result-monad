@@ -12,7 +12,10 @@ classDiagram
     ErrCause <|-- FilteredCause
     ErrCause <|-- HttpResponseCause
 
-    class XResult{
+    note for ErrCause "Just marker interface, does not have methods"
+
+    class XResult~T~ {
+        <<abstract>>
         abstract fold()
         abstract consume()
         map()
@@ -21,12 +24,16 @@ classDiagram
 
     }
     
-    class Ok{
+    class Ok~T~{
       T value
+      fold()
+      consume()
     }
     
     class Err{
       ErrCause cause
+      fold()
+      consume()
     }
 
     class ErrCause{

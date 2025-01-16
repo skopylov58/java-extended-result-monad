@@ -3,8 +3,9 @@ package com.github.skopylov58.functional;
 import org.junit.jupiter.api.Test;
 
 import static com.github.skopylov58.functional.XResult.*;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +26,7 @@ public class XResultTest {
 
     @Test
     public void testNull() {
-        XResult<Integer> ir = XResult.of(null);
+        XResult<Integer> ir = XResult.ofNullable(null);
         ir.consume(t -> fail(),
                 err -> {
                     System.out.println(err);
@@ -36,19 +37,40 @@ public class XResultTest {
                 });
     }
 
-
     @Test
     void testStream() {
-
-        List<XResult<Integer>> collected = Stream.of(1, 2, 3, null, 0, -5)
-                .map(XResult::of)
-                .map(xr -> xr.filter(i -> i % 2 == 0))
-                .collect(Collectors.toList());
-
-        collected.forEach(
-                xr -> System.out.println(xr.toString())
-        );
-
-
+        Stream.of(1, 2, 3, null, 0, -5)
+                .map(XResult::ofNullable)
+                .map(xr -> xr.filter(i -> i % 2 == 0, i -> i + " Not even"))
+                .forEach(xr -> System.out.println(xr.toString()));
     }
+
+    @Test
+    void isOk() {
+        XResult<Integer> r1 = XResult.ofNullable(10);
+        assertInstanceOf(Ok.class, r1);
+        assertTrue(r1.isOk());
+        assertFalse(r1.isErr());
+    }
+
+    @Test
+    void testCloseable() throws Exception {
+        MyCloseable myCloseable = new MyCloseable();
+        XResult<MyCloseable> result = ofNullable(myCloseable);
+        try (var c = result.asCloseable()) {
+            assertTrue(result.isOk());
+            XResult<Integer> i = result.map(clo -> 1);
+        }
+        assertTrue(myCloseable.closed);
+    }
+
+    static class MyCloseable implements Closeable {
+        boolean closed = false;
+
+        @Override
+        public void close() {
+            closed = true;
+        }
+    }
+
 }

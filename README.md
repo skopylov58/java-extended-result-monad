@@ -50,7 +50,7 @@ classDiagram
     }
 
     class FilteredCause {
-        String filtered
+        String reason
     }
 
     class HttpResponseCause {

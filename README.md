@@ -25,7 +25,7 @@ Extended result monad for java
 и `isSuccess()` у вас это не получится, что делает использование FP в данном случае сомнительным. 
 
 Далее, в реальной жизни возможностей Optional и Result часто бывает недостоточно. Рассмотрим
-пример простой функции
+пример простой классической  функции
 
 ```java
 public User getUserById(long id);
@@ -62,7 +62,7 @@ X в имени `XResult<T>` означает
 - eXtensible - расширяемый. Вы можете легко добавлять новые причины отказов (`ErrCause`) в соответствии 
 с вашей предметной областью (problem domain).
 
-Ниже на диаграмме показан дизайн монады XResult. Он традиционно имеет базовый класс XResult и 
+Ниже на диаграмме показан дизайн монады XResult. Он прост и традиционно имеет базовый класс XResult и 
 двух потомков - `Ok`, который содержит результат типа `T` и `Err`, который содержит причину отказа 
 `ErrCause`. `ErrCause` - маркерный интерфейс, который не накладывает никаких обязательств для
 имплементирующих этот интерфейс. XResult предоставляет три имплементации ErrCause
@@ -83,9 +83,9 @@ classDiagram
     ErrCause <|-- SimpleCause
     ErrCause <|-- ExceptionCause
     ErrCause <|-- FilteredCause
-    ErrCause <|-- HttpResponseCause
+    ErrCause <|-- HttpErrorCause
 
-    note for ErrCause "Just marker interface, does not have methods"
+    note for ErrCause "Just marker interface, does not have any methods"
 
     class XResult~T~ {
         <<abstract>>
@@ -126,7 +126,7 @@ classDiagram
         String reason
     }
 
-    class HttpResponseCause {
+    class HttpErrorCause {
         String url
         String method
         int responseCode

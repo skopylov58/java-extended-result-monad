@@ -1,6 +1,10 @@
 # java-extended-result-monad
 Extended result monad for java
 
+## Мотивация
+
+TODO
+
 ## Проблема
 
 В функциональнои программировании (далее FP) традиционно существует три монады для 

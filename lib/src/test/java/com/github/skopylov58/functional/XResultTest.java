@@ -7,20 +7,26 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class XResultTest {
 
     @Test
-    public void test() {
+    public void testOk() {
+        XResult<Integer> ok = XResult.ok(20);
+        assertTrue(ok.isOk());
 
-        XResult<Integer> r = XResult.ok(20);
-
-        XResult<Integer> rex = XResult.err(new IOException());
-
-
+        try {
+            XResult<Integer> err = XResult.<Integer>ok(null);
+            fail();
+        } catch (NullPointerException e) {
+            //ok
+            //Does not allow nulls in XResult
+        }
     }
 
 
@@ -30,6 +36,7 @@ public class XResultTest {
         ir.consume(t -> fail(),
                 err -> {
                     System.out.println(err);
+                    assertInstanceOf(ExceptionCause.class, err);
                     if (err instanceof ExceptionCause) {
                         Exception npe = ((ExceptionCause) err).getException();
                         System.getLogger("").log(System.Logger.Level.ERROR, "npe", npe);
@@ -73,4 +80,30 @@ public class XResultTest {
         }
     }
 
+    @Test
+    void testSafeMapper() {
+        XResult<URL> foo = ok("foo").map(this::createUrl);
+        assertTrue(foo.isErr());
+        System.out.println(foo);
+
+        XResult<URL> google = ok("http://www.google.com").map(this::createUrl);
+        assertTrue(google.isOk());
+        System.out.println(google);
+
+    }
+
+    @Test
+    void testSafeMapperShort() {
+        XResult<URL> foo = ok("foo").map(URL::new);
+        assertTrue(foo.isErr());
+        foo.consume(ok -> fail(),
+                err -> {
+                    assertInstanceOf(ExceptionCause.class, err);
+                    System.out.println(err);
+                });
+    }
+
+    URL createUrl(String s) throws Exception {
+        return new URL(s);
+    }
 }

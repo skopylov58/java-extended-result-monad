@@ -193,15 +193,15 @@ public class HttpError implements ErrCause {
 
 ```java
     XResult<User> user = getUserById(100);
-    user.consume( ok -> {
+    user.on( ok -> {
         // обработка успеха
         },
         err -> {
-            if (err insranceof HttpError)) {
+          if (err insranceof HttpError)) {
                 HttpError httpErr = (HttpError) err;
                 int code = httpErr.getResutCode();
-        }
-    })
+          }
+        })
 ```
 
 

@@ -6,11 +6,7 @@ import static com.github.skopylov58.functional.XResult.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.Closeable;
-import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class XResultTest {
@@ -33,7 +29,7 @@ public class XResultTest {
     @Test
     public void testNull() {
         XResult<Integer> ir = XResult.ofNullable(null);
-        ir.consume(t -> fail(),
+        ir.on(t -> fail(),
                 err -> {
                     System.out.println(err);
                     assertInstanceOf(ExceptionCause.class, err);
@@ -96,7 +92,7 @@ public class XResultTest {
     void testSafeMapperShort() {
         XResult<URL> foo = ok("foo").map(URL::new);
         assertTrue(foo.isErr());
-        foo.consume(ok -> fail(),
+        foo.on(ok -> fail(),
                 err -> {
                     assertInstanceOf(ExceptionCause.class, err);
                     System.out.println(err);

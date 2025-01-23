@@ -56,7 +56,7 @@ public abstract class XResult<T> {
      * @param errConsumer consumer for Err result.
      * @return current result
      */
-    public abstract XResult<T> consume(Consumer<? super T> okConsumer, Consumer<? super ErrCause> errConsumer);
+    public abstract XResult<T> on(Consumer<? super T> okConsumer, Consumer<? super ErrCause> errConsumer);
 
     public <R> XResult<R> map(ThrowingFunction<? super T, ? extends R> mapper) {
         return fold(safeMapper(mapper), err -> (XResult<R>) this);
@@ -95,7 +95,7 @@ public abstract class XResult<T> {
     public XResult<T> filter(ThrowingPredicate<? super T> predicate, Function<T, String> messageMapper) {
         return fold(ok -> {
                     try {
-                        return predicate.test(ok) ? this : err(new FilteredCause(messageMapper.apply(ok)));
+                        return predicate.test(ok) ? this : err(new FilterCause(messageMapper.apply(ok)));
                     } catch (Exception e) {
                         return err(e);
                     }
@@ -227,7 +227,7 @@ public abstract class XResult<T> {
         }
 
         @Override
-        public XResult<T> consume(Consumer<? super T> okConsumer, Consumer<? super ErrCause> errConsumer) {
+        public XResult<T> on(Consumer<? super T> okConsumer, Consumer<? super ErrCause> errConsumer) {
             okConsumer.accept(value);
             return this;
         }
@@ -249,7 +249,7 @@ public abstract class XResult<T> {
         }
 
         @Override
-        public XResult<T> consume(Consumer<? super T> okConsumer, Consumer<? super ErrCause> errConsumer) {
+        public XResult<T> on(Consumer<? super T> okConsumer, Consumer<? super ErrCause> errConsumer) {
             errConsumer.accept(cause);
             return this;
         }
@@ -271,13 +271,13 @@ public abstract class XResult<T> {
         Exception exception;
     }
 
-    public static final FilteredCause FILTERED_NO_REASON = new FilteredCause("");
+    public static final FilterCause FILTERED_NO_REASON = new FilterCause("");
 
     /**
      * Filtered error cause, is used in filter() operation.
      */
     @Value
-    public static class FilteredCause implements ErrCause {
+    public static class FilterCause implements ErrCause {
         String reason;
     }
 

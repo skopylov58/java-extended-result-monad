@@ -35,7 +35,7 @@ public class XResultTest {
                     assertInstanceOf(ExceptionCause.class, err);
                     if (err instanceof ExceptionCause) {
                         Exception npe = ((ExceptionCause) err).getException();
-                        System.getLogger("").log(System.Logger.Level.ERROR, "npe", npe);
+                        //System.getLogger("").log(System.Logger.Level.ERROR, "npe", npe);
                     }
                 });
     }
@@ -60,7 +60,7 @@ public class XResultTest {
     void testCloseable() throws Exception {
         MyCloseable myCloseable = new MyCloseable();
         XResult<MyCloseable> result = ofNullable(myCloseable);
-        try (var c = result.asCloseable()) {
+        try (Closeable c = result.asCloseable()) {
             assertTrue(result.isOk());
             XResult<Integer> i = result.map(clo -> 1);
         }

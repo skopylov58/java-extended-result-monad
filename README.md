@@ -23,7 +23,7 @@
 [для примера тут, в Oracle Java Magazine ](https://blogs.oracle.com/javamagazine/post/optional-class-null-pointer-drawbacks)
 
 <details>
-<summary>Что лично меня в Optional не устраивает</summary>
+<summary>Что лично меня  не устраивает в Optional</summary>
 Трудно установить место возниковения null при
 использовании нескольких операций `map()` и непонятно какой фильтр сработал при использовании
 нескольких операций `filter()`. Иными словами, Optional не сохраняет контекста при возникновении проблемы.
@@ -210,8 +210,8 @@ public class HttpError implements ErrCause {
 ## Реализация
 
 XResult имплементирован в одном исходном файле 
-(~ 320 строк кода с подробным javadoc) и не имеет run-time зависимостей,
-[код на Github](https://github.com/skopylov58/java-extended-result-monad)
+(~320 строк кода с подробным javadoc) и не имеет run-time зависимостей,
+[репозитарий на Github](https://github.com/skopylov58/java-extended-result-monad)
 
 Для компиляции используется Java версии 8 (`JavaLanguageVersion.of(8)`), 
 это сделано преднамеренно, потому что может возникнуть необходимость 

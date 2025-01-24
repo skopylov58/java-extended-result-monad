@@ -27,3 +27,10 @@ java {
         languageVersion = JavaLanguageVersion.of(8)
     }
 }
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        csv.required = true
+    }
+}

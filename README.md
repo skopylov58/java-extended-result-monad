@@ -1,7 +1,7 @@
 # Pragmatic FP in Java
 
 ![example workflow](https://github.com/skopylov58/java-extended-result-monad/actions/workflows/gradle.yml/badge.svg)
-
+[![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://skopylov58.github.io/java-extended-result-monad/)
 ## Мотивация
 Поводом к написанию этой статьи стал 
 ["Pragmatic FP" манифест](https://dzone.com/articles/introduction-to-pragmatic-functional-java)

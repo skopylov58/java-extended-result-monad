@@ -12,6 +12,8 @@ import java.util.stream.Stream;
 
 public abstract class XResult<T> {
 
+    private XResult(){};
+
     /**
      * Just marker interface for result error causes.
      */

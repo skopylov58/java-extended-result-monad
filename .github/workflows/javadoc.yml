@@ -20,5 +20,4 @@ jobs:
           java-version: 17
           target-folder: docs
           project: gradle
-          custom-command: javadoc -d docs
           

@@ -228,8 +228,6 @@ public abstract class XResult<T> {
         Exception exception;
     }
 
-    public static final FilterCause FILTERED_NO_REASON = new FilterCause("");
-
     /**
      * Filtered error cause, is used in filter() operation.
      */

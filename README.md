@@ -96,7 +96,7 @@ classDiagram
     
     ErrCause <|-- SimpleCause
     ErrCause <|-- ExceptionCause
-    ErrCause <|-- FilteredCause
+    ErrCause <|-- FilterCause
     ErrCause <|-- HttpErrorCause
 
     note for ErrCause "Just marker interface, does not have any methods"

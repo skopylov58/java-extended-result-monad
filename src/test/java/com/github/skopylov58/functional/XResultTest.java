@@ -7,6 +7,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.Closeable;
 import java.net.URL;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class XResultTest {
@@ -41,7 +45,7 @@ public class XResultTest {
     }
 
     @Test
-    void testStream() {
+    void testResultInStream() {
         Stream.of(1, 2, 3, null, 0, -5)
                 .map(XResult::ofNullable)
                 .map(xr -> xr.filter(i -> i % 2 == 0, i -> i + " Not even"))
@@ -55,6 +59,40 @@ public class XResultTest {
         assertTrue(r1.isOk());
         assertFalse(r1.isErr());
     }
+
+    @Test
+    void testOptional() {
+        XResult<Integer> xr = XResult.ok(12);
+        Optional<Integer> op = xr.optional();
+        assertTrue(op.isPresent());
+        Integer i = op.get();
+        assertEquals(Integer.valueOf(12), i);
+
+        xr = XResult.err("not allowed");
+        op = xr.optional();
+        assertFalse(op.isPresent());
+        try {
+            i = op.get();
+            fail();
+        }catch (NoSuchElementException e) {
+            //ok
+        }
+    }
+
+    @Test
+    void testStream() {
+        XResult<Integer> xr = XResult.ok(12);
+        Stream<Integer> is = xr.stream();
+        List<Integer> list = is.collect(Collectors.toList());
+        assertEquals(1, list.size());
+        assertEquals(12, list.get(0));
+
+        xr = XResult.err("not allowed");
+        is = xr.stream();
+        list = is.collect(Collectors.toList());
+        assertTrue(list.isEmpty());
+    }
+
 
     @Test
     void testCloseable() throws Exception {

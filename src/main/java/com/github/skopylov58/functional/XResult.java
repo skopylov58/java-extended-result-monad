@@ -2,8 +2,6 @@ package com.github.skopylov58.functional;
 
 import lombok.*;
 
-import java.io.Closeable;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
@@ -11,8 +9,6 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 public abstract class XResult<T> {
-
-    private XResult(){};
 
     /**
      * Just marker interface for result error causes.
@@ -61,7 +57,13 @@ public abstract class XResult<T> {
     public abstract XResult<T> on(Consumer<? super T> okConsumer, Consumer<? super ErrCause> errConsumer);
 
     public <R> XResult<R> map(ThrowingFunction<? super T, ? extends R> mapper) {
-        return fold(safeMapper(mapper), err -> (XResult<R>) this);
+        return fold(ok -> {
+            try {
+                return XResult.ofNullable(mapper.apply(ok));
+            } catch (Exception e) {
+                return XResult.err(e);
+            }
+        }, err -> (XResult<R>) this);
     }
 
     public <R> XResult<R> flatMap(ThrowingFunction<? super T, XResult<R>> mapper) {
@@ -75,16 +77,6 @@ public abstract class XResult<T> {
                 },
                 err -> (XResult<R>) this
         );
-    }
-
-    /**
-     * Filters this result.
-     *
-     * @param predicate tester function
-     * @return this if test is successful, Err with FILTERED_NO_REASON cause otherwise.
-     */
-    public XResult<T> filter(ThrowingPredicate<? super T> predicate) {
-        return filter(predicate, t -> "Filtered reason is not provided");
     }
 
     /**
@@ -115,15 +107,6 @@ public abstract class XResult<T> {
     }
 
     /**
-     * Checks if given result is Err
-     *
-     * @return true if Err
-     */
-    public boolean isErr() {
-        return !isOk();
-    }
-
-    /**
      * Converts this result to Java Optional
      *
      * @return Java Optional.of() for Ok and Optional.empty() for Err result.
@@ -142,22 +125,6 @@ public abstract class XResult<T> {
     }
 
     /**
-     * Makes if possible this result as Closeable.
-     * @return Closeable
-     */
-    public Closeable asCloseable() {
-        return fold(ok -> () -> {
-                    if (ok instanceof Closeable) {
-                        Closeable clo = (Closeable) ok;
-                        clo.close();
-                    }
-                },
-                //Should errors to be closeable too?
-                err -> () -> {}
-        );
-    }
-
-    /**
      * Factory method to create result from value of type T
      *
      * @param t   value, may be null
@@ -165,19 +132,7 @@ public abstract class XResult<T> {
      * @return Ok result if t is not null, Err result with NullPointerException cause if t is null.
      */
     public static <T> XResult<T> ofNullable(T t) {
-        return t != null ? ok(t) : err(new NullPointerException("XResult.ofNullable"));
-    }
-
-    /**
-     * Factory method to create result from value of type T
-     *
-     * @param t   value, may not be null
-     * @param <T> result type
-     * @return Ok result if t is not null.
-     * @throws NullPointerException if t is null.
-     */
-    public static <T> XResult<T> ok(@NonNull T t) {
-        return new Ok<>(Objects.requireNonNull(t));
+        return t != null ? new Ok<>(t) : err(new NullPointerException("XResult.ofNullable"));
     }
 
     /**
@@ -281,24 +236,6 @@ public abstract class XResult<T> {
     @Value
     public static class FilterCause implements ErrCause {
         String reason;
-    }
-
-    /**
-     * Helper function to transform throwing partial function to error safe one.
-     *
-     * @param function that may throw Exception
-     * @param <T>      function argument type
-     * @param <R>      function result type
-     * @return function that returns XResult
-     */
-    public static <T, R> Function<? super T, XResult<R>> safeMapper(ThrowingFunction<? super T, ? extends R> function) {
-        return t -> {
-            try {
-                return XResult.ofNullable(function.apply(t));
-            } catch (Exception e) {
-                return XResult.err(e);
-            }
-        };
     }
 
     /**

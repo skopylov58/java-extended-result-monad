@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":9,"i2":9,"i3":9,"i4":10,"i5":10,"i6":10,"i7":6,"i8":9,"i9":10,"i10":10,"i11":10,"i12":9,"i13":9,"i14":6,"i15":10,"i16":9,"i17":10};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":10,"i4":10,"i5":6,"i6":9,"i7":10,"i8":10,"i9":9,"i10":6,"i11":10,"i12":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -73,13 +73,13 @@ var activeTableTab = "activeTableTab";
 <li>Summary:&nbsp;</li>
 <li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
 <li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -200,6 +200,23 @@ extends java.lang.Object</pre>
 </table>
 </li>
 </ul>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#XResult--">XResult</a></span>()</code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -213,107 +230,77 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.io.Closeable</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#asCloseable--">asCloseable</a></span>()</code>
-<div class="block">Makes if possible this result as Closeable.</div>
-</td>
-</tr>
-<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#err-java.lang.Exception-">err</a></span>(java.lang.Exception&nbsp;e)</code>
 <div class="block">Factor method to create errors from exceptions.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#err-java.lang.String-">err</a></span>(java.lang.String&nbsp;message)</code>
 <div class="block">Factory method to create SimpleCause errors.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#err-com.github.skopylov58.functional.XResult.ErrCause-">err</a></span>(<a href="../../../../com/github/skopylov58/functional/XResult.ErrCause.html" title="interface in com.github.skopylov58.functional">XResult.ErrCause</a>&nbsp;cause)</code>
 <div class="block">Factory method to create errors.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#filter-com.github.skopylov58.functional.XResult.ThrowingPredicate-">filter</a></span>(<a href="../../../../com/github/skopylov58/functional/XResult.ThrowingPredicate.html" title="interface in com.github.skopylov58.functional">XResult.ThrowingPredicate</a>&lt;? super <a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;&nbsp;predicate)</code>
-<div class="block">Filters this result.</div>
-</td>
-</tr>
-<tr id="i5" class="rowColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#filter-com.github.skopylov58.functional.XResult.ThrowingPredicate-java.util.function.Function-">filter</a></span>(<a href="../../../../com/github/skopylov58/functional/XResult.ThrowingPredicate.html" title="interface in com.github.skopylov58.functional">XResult.ThrowingPredicate</a>&lt;? super <a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;&nbsp;predicate,
       java.util.function.Function&lt;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>,java.lang.String&gt;&nbsp;messageMapper)</code>
 <div class="block">Filters this result.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>&lt;R&gt;&nbsp;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;R&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#flatMap-com.github.skopylov58.functional.XResult.ThrowingFunction-">flatMap</a></span>(<a href="../../../../com/github/skopylov58/functional/XResult.ThrowingFunction.html" title="interface in com.github.skopylov58.functional">XResult.ThrowingFunction</a>&lt;? super <a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>,<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;R&gt;&gt;&nbsp;mapper)</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>abstract &lt;R&gt;&nbsp;R</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#fold-java.util.function.Function-java.util.function.Function-">fold</a></span>(java.util.function.Function&lt;? super <a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>,? extends R&gt;&nbsp;okMapper,
     java.util.function.Function&lt;? super <a href="../../../../com/github/skopylov58/functional/XResult.ErrCause.html" title="interface in com.github.skopylov58.functional">XResult.ErrCause</a>,? extends R&gt;&nbsp;errMapper)</code>
 <div class="block">Folds this XResult to R type.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#fromCallable-java.util.concurrent.Callable-">fromCallable</a></span>(java.util.concurrent.Callable&lt;? extends T&gt;&nbsp;callable)</code>
 <div class="block">Factory method to create results from Callable.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
-<td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#isErr--">isErr</a></span>()</code>
-<div class="block">Checks if given result is Err</div>
-</td>
-</tr>
-<tr id="i10" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#isOk--">isOk</a></span>()</code>
 <div class="block">Checks if given result is Ok.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>&lt;R&gt;&nbsp;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;R&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#map-com.github.skopylov58.functional.XResult.ThrowingFunction-">map</a></span>(<a href="../../../../com/github/skopylov58/functional/XResult.ThrowingFunction.html" title="interface in com.github.skopylov58.functional">XResult.ThrowingFunction</a>&lt;? super <a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>,? extends R&gt;&nbsp;mapper)</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#ofNullable-T-">ofNullable</a></span>(T&nbsp;t)</code>
 <div class="block">Factory method to create result from value of type T</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#ok-T-">ok</a></span>(T&nbsp;t)</code>
-<div class="block">Factory method to create result from value of type T</div>
-</td>
-</tr>
-<tr id="i14" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>abstract <a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#on-java.util.function.Consumer-java.util.function.Consumer-">on</a></span>(java.util.function.Consumer&lt;? super <a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;&nbsp;okConsumer,
   java.util.function.Consumer&lt;? super <a href="../../../../com/github/skopylov58/functional/XResult.ErrCause.html" title="interface in com.github.skopylov58.functional">XResult.ErrCause</a>&gt;&nbsp;errConsumer)</code>
 <div class="block">Consumes this XResult.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#optional--">optional</a></span>()</code>
 <div class="block">Converts this result to Java Optional</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
-<td class="colFirst"><code>static &lt;T,R&gt;&nbsp;java.util.function.Function&lt;? super T,<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;R&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#safeMapper-com.github.skopylov58.functional.XResult.ThrowingFunction-">safeMapper</a></span>(<a href="../../../../com/github/skopylov58/functional/XResult.ThrowingFunction.html" title="interface in com.github.skopylov58.functional">XResult.ThrowingFunction</a>&lt;? super T,? extends R&gt;&nbsp;function)</code>
-<div class="block">Helper function to transform throwing partial function to error safe one.</div>
-</td>
-</tr>
-<tr id="i17" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#stream--">stream</a></span>()</code>
 <div class="block">Converts this result to Java Stream</div>
@@ -348,6 +335,23 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>FILTERED_NO_REASON</h4>
 <pre>public static final&nbsp;<a href="../../../../com/github/skopylov58/functional/XResult.FilterCause.html" title="class in com.github.skopylov58.functional">XResult.FilterCause</a> FILTERED_NO_REASON</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="XResult--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>XResult</h4>
+<pre>public&nbsp;XResult()</pre>
 </li>
 </ul>
 </li>
@@ -414,22 +418,6 @@ extends java.lang.Object</pre>
 <pre>public&nbsp;&lt;R&gt;&nbsp;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;R&gt;&nbsp;flatMap(<a href="../../../../com/github/skopylov58/functional/XResult.ThrowingFunction.html" title="interface in com.github.skopylov58.functional">XResult.ThrowingFunction</a>&lt;? super <a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>,<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;R&gt;&gt;&nbsp;mapper)</pre>
 </li>
 </ul>
-<a name="filter-com.github.skopylov58.functional.XResult.ThrowingPredicate-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>filter</h4>
-<pre>public&nbsp;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;&nbsp;filter(<a href="../../../../com/github/skopylov58/functional/XResult.ThrowingPredicate.html" title="interface in com.github.skopylov58.functional">XResult.ThrowingPredicate</a>&lt;? super <a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;&nbsp;predicate)</pre>
-<div class="block">Filters this result.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>predicate</code> - tester function</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>this if test is successful, Err with FILTERED_NO_REASON cause otherwise.</dd>
-</dl>
-</li>
-</ul>
 <a name="filter-com.github.skopylov58.functional.XResult.ThrowingPredicate-java.util.function.Function-">
 <!--   -->
 </a>
@@ -462,20 +450,6 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="isErr--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isErr</h4>
-<pre>public&nbsp;boolean&nbsp;isErr()</pre>
-<div class="block">Checks if given result is Err</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>true if Err</dd>
-</dl>
-</li>
-</ul>
 <a name="optional--">
 <!--   -->
 </a>
@@ -504,20 +478,6 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="asCloseable--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>asCloseable</h4>
-<pre>public&nbsp;java.io.Closeable&nbsp;asCloseable()</pre>
-<div class="block">Makes if possible this result as Closeable.</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>Closeable</dd>
-</dl>
-</li>
-</ul>
 <a name="ofNullable-java.lang.Object-">
 <!--   -->
 </a><a name="ofNullable-T-">
@@ -535,29 +495,6 @@ extends java.lang.Object</pre>
 <dd><code>t</code> - value, may be null</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Ok result if t is not null, Err result with NullPointerException cause if t is null.</dd>
-</dl>
-</li>
-</ul>
-<a name="ok-java.lang.Object-">
-<!--   -->
-</a><a name="ok-T-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>ok</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;T&gt;&nbsp;ok(@NonNull
-                                T&nbsp;t)</pre>
-<div class="block">Factory method to create result from value of type T</div>
-<dl>
-<dt><span class="paramLabel">Type Parameters:</span></dt>
-<dd><code>T</code> - result type</dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>t</code> - value, may not be null</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>Ok result if t is not null.</dd>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.lang.NullPointerException</code> - if t is null.</dd>
 </dl>
 </li>
 </ul>
@@ -612,25 +549,6 @@ extends java.lang.Object</pre>
 <dd><code>message</code> - err cause descriptions</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Err result</dd>
-</dl>
-</li>
-</ul>
-<a name="safeMapper-com.github.skopylov58.functional.XResult.ThrowingFunction-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>safeMapper</h4>
-<pre>public static&nbsp;&lt;T,R&gt;&nbsp;java.util.function.Function&lt;? super T,<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;R&gt;&gt;&nbsp;safeMapper(<a href="../../../../com/github/skopylov58/functional/XResult.ThrowingFunction.html" title="interface in com.github.skopylov58.functional">XResult.ThrowingFunction</a>&lt;? super T,? extends R&gt;&nbsp;function)</pre>
-<div class="block">Helper function to transform throwing partial function to error safe one.</div>
-<dl>
-<dt><span class="paramLabel">Type Parameters:</span></dt>
-<dd><code>T</code> - function argument type</dd>
-<dd><code>R</code> - function result type</dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>function</code> - that may throw Exception</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>function that returns XResult</dd>
 </dl>
 </li>
 </ul>
@@ -705,13 +623,13 @@ extends java.lang.Object</pre>
 <li>Summary:&nbsp;</li>
 <li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
 <li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>

@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":10,"i4":10,"i5":6,"i6":9,"i7":10,"i8":10,"i9":9,"i10":6,"i11":10,"i12":10};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":10,"i4":10,"i5":6,"i6":9,"i7":10,"i8":10,"i9":10,"i10":9,"i11":6,"i12":10,"i13":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -253,35 +253,41 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i7" class="rowColor">
+<td class="colFirst"><code><a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#getOrDefaut-java.util.function.Supplier-">getOrDefaut</a></span>(java.util.function.Supplier&lt;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;&nbsp;defaultSupplier)</code>
+<div class="block">Gets XResult value.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#isOk--">isOk</a></span>()</code>
 <div class="block">Checks if given result is Ok.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>&lt;R&gt;&nbsp;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;R&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#map-com.github.skopylov58.functional.XResult.ThrowingFunction-">map</a></span>(<a href="../../../../com/github/skopylov58/functional/XResult.ThrowingFunction.html" title="interface in com.github.skopylov58.functional">XResult.ThrowingFunction</a>&lt;? super <a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>,? extends R&gt;&nbsp;mapper)</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#ofNullable-T-">ofNullable</a></span>(T&nbsp;t)</code>
 <div class="block">Factory method to create result from value of type T</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>abstract <a href="../../../../com/github/skopylov58/functional/XResult.html" title="class in com.github.skopylov58.functional">XResult</a>&lt;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#on-java.util.function.Consumer-java.util.function.Consumer-">on</a></span>(java.util.function.Consumer&lt;? super <a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;&nbsp;okConsumer,
   java.util.function.Consumer&lt;? super <a href="../../../../com/github/skopylov58/functional/XResult.ErrCause.html" title="interface in com.github.skopylov58.functional">XResult.ErrCause</a>&gt;&nbsp;errConsumer)</code>
 <div class="block">Consumes this XResult.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#optional--">optional</a></span>()</code>
 <div class="block">Converts this result to Java Optional</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>java.util.stream.Stream&lt;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/github/skopylov58/functional/XResult.html#stream--">stream</a></span>()</code>
 <div class="block">Converts this result to Java Stream</div>
@@ -361,6 +367,22 @@ extends java.lang.Object</pre>
 <dd><code>errConsumer</code> - consumer for Err result.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>current result</dd>
+</dl>
+</li>
+</ul>
+<a name="getOrDefaut-java.util.function.Supplier-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getOrDefaut</h4>
+<pre>public&nbsp;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&nbsp;getOrDefaut(java.util.function.Supplier&lt;<a href="../../../../com/github/skopylov58/functional/XResult.html" title="type parameter in XResult">T</a>&gt;&nbsp;defaultSupplier)</pre>
+<div class="block">Gets XResult value.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>defaultSupplier</code> - provides default value if this result is Err.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>value or default value if this result is Err</dd>
 </dl>
 </li>
 </ul>

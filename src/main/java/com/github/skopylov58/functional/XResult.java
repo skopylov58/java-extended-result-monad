@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public abstract class XResult<T> {
@@ -55,6 +56,15 @@ public abstract class XResult<T> {
      * @return current result
      */
     public abstract XResult<T> on(Consumer<? super T> okConsumer, Consumer<? super ErrCause> errConsumer);
+
+    /**
+     * Gets XResult value.
+     * @param defaultSupplier provides default value if this result is Err.
+     * @return value or default value if this result is Err
+     */
+    public T getOrDefaut(Supplier<T> defaultSupplier) {
+        return fold(ok -> ok, err -> defaultSupplier.get());
+    }
 
     public <R> XResult<R> map(ThrowingFunction<? super T, ? extends R> mapper) {
         return fold(ok -> {

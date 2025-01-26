@@ -196,6 +196,18 @@ public class XResultTest {
 
     }
 
+    @Test
+    void testGetOrDefault() {
+
+        XResult<Integer> i = XResult.ofNullable(12);
+        Integer got = i.getOrDefaut(() -> 13);
+        assertEquals(12, got);
+
+        i = XResult.ofNullable(null);
+        got = i.getOrDefaut(() -> 13);
+        assertEquals(13, got);
+    }
+
     URL createUrl(String s) throws Exception {
         return new URL(s);
     }

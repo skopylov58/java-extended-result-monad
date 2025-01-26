@@ -210,11 +210,17 @@ public class HttpError implements ErrCause {
         })
 ```
 
-## Реализация
+## В итоге
 
-XResult имплементирован в одном исходном файле 
-(~320 строк кода с подробным javadoc) и не имеет run-time зависимостей,
-[репозитарий на Github](https://github.com/skopylov58/java-extended-result-monad)
+`XResult<T>`
+- обладает свойствами `Optional<T>`, `Result<T>` и `Either<L,R>`
+- легко расширяется для создания причин отказов `ErrCause` в вашей предметной области
+- позволяет применять FP в легаси проектах и создавать безопасные API в новых проектах
+- имеет компактный дизайн и API [javadoc](https://skopylov58.github.io/java-extended-result-monad/) 
+- имплементирован в одном исходном файле (~260 строк кода с подробным javadoc)
+- 100% покрыт юнит тестами
+- не имеет run-time зависимостей
+- [размещен на Github](https://github.com/skopylov58/java-extended-result-monad)
 
 Для компиляции используется Java версии 8 (`JavaLanguageVersion.of(8)`), 
 это сделано преднамеренно, потому что может возникнуть необходимость 
@@ -225,7 +231,7 @@ XResult имплементирован в одном исходном файле
 (pattern matching), что сделает код еще более коротким и удобным в использовании.
 Но это на будущее.
 
-
+Сергей Копылов
 
 
 

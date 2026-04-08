@@ -67,26 +67,15 @@ public abstract class XResult<T> {
     }
 
     public <R> XResult<R> map(ThrowingFunction<? super T, ? extends R> mapper) {
-        return fold(ok -> {
-            try {
-                return XResult.ofNullable(mapper.apply(ok));
-            } catch (Exception e) {
-                return XResult.err(e);
-            }
-        }, err -> (XResult<R>) this);
+        return fold(ok -> fromCallable(() -> mapper.apply(ok)), err -> (XResult<R>) this);
     }
 
     public <R> XResult<R> flatMap(ThrowingFunction<? super T, XResult<R>> mapper) {
         return fold(ok -> {
-                    try {
-                        XResult<R> applied = mapper.apply(ok);
-                        return applied != null ? applied : err(new NullPointerException());
-                    } catch (Exception e) {
-                        return err(e);
-                    }
+                    XResult<XResult<R>> xr = fromCallable(() -> mapper.apply(ok));
+                    return xr.fold(okay -> okay, XResult::err);
                 },
-                err -> (XResult<R>) this
-        );
+                err -> (XResult<R>) this);
     }
 
     /**
@@ -98,11 +87,8 @@ public abstract class XResult<T> {
      */
     public XResult<T> filter(ThrowingPredicate<? super T> predicate, Function<T, String> messageMapper) {
         return fold(ok -> {
-                    try {
-                        return predicate.test(ok) ? this : err(new FilterCause(messageMapper.apply(ok)));
-                    } catch (Exception e) {
-                        return err(e);
-                    }
+                    XResult<Boolean> tested = fromCallable(() -> predicate.test(ok));
+                    return tested.fold(okay -> okay ? this : err(new FilterCause(messageMapper.apply(ok))), XResult::err);
                 },
                 err -> this);
     }

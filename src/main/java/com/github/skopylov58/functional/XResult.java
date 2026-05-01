@@ -67,14 +67,13 @@ public abstract class XResult<T> {
     }
 
     public <R> XResult<R> map(ThrowingFunction<? super T, ? extends R> mapper) {
-        return fold(ok -> fromCallable(() -> mapper.apply(ok)), err -> (XResult<R>) this);
+        return fold(lift(mapper), err -> (XResult<R>)this);
     }
 
     public <R> XResult<R> flatMap(ThrowingFunction<? super T, XResult<R>> mapper) {
-        return fold(ok -> {
-                    XResult<XResult<R>> xr = fromCallable(() -> mapper.apply(ok));
-                    return xr.fold(okay -> okay, XResult::err);
-                },
+        return fold(ok -> lift(mapper)
+                        .apply(ok)
+                        .fold(r -> r, XResult::err),
                 err -> (XResult<R>) this);
     }
 
@@ -86,10 +85,10 @@ public abstract class XResult<T> {
      * @return this if test is successful, Err with FilteredCause otherwise or Err with ExceptionCause if exception happens.
      */
     public XResult<T> filter(ThrowingPredicate<? super T> predicate, Function<T, String> messageMapper) {
-        return fold(ok -> {
-                    XResult<Boolean> tested = fromCallable(() -> predicate.test(ok));
-                    return tested.fold(okay -> okay ? this : err(new FilterCause(messageMapper.apply(ok))), XResult::err);
-                },
+
+        return fold(ok -> lift(predicate::test)
+                            .apply(ok)
+                            .fold(b -> b ? this : err(new FilterCause(messageMapper.apply(ok))), XResult::err),
                 err -> this);
     }
 
@@ -245,5 +244,22 @@ public abstract class XResult<T> {
         } catch (Exception e) {
             return XResult.err(e);
         }
+    }
+
+    /**
+     * Helper, converts partial throwing function to safe total one.
+     * @param func partial function that may throw en exception
+     * @return total save function
+     * @param <T> function parameter type
+     * @param <R> function result type
+     */
+    public static <T, R> Function<? super T, XResult<R>> lift(ThrowingFunction<? super T, ? extends R> func) {
+        return t -> {
+            try {
+                return ofNullable(func.apply(t));
+            } catch (Exception e) {
+                return err(e);
+            }
+        };
     }
 }
